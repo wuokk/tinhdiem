@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tính điểm</title>
+  <style>
+    body { font-family: Arial; padding: 20px; max-width: 400px; margin: auto; }
+    input { margin: 5px 0; width: 100%; padding: 8px; }
+    .result { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Tính điểm xét tuyển</h2>
+
+  <label>Điểm chính:</label>
+  <input type="number" id="diem" step="0.01">
+
+  <label>Điểm khuyến khích:</label>
+  <input type="number" id="kk" step="0.01">
+
+  <label>Điểm ưu tiên:</label>
+  <input type="number" id="ut" step="0.01">
+
+  <div class="result" id="ketqua">Tổng điểm: </div>
+
+  <script>
+    const diem = document.getElementById("diem");
+    const kk = document.getElementById("kk");
+    const ut = document.getElementById("ut");
+    const ketqua = document.getElementById("ketqua");
+
+    function tinhDiem() {
+      const d = parseFloat(diem.value) || 0;
+      const k = parseFloat(kk.value) || 0;
+      const u = parseFloat(ut.value) || 0;
+      const tong = d + k;
+
+      let ket_qua;
+      if (tong >= 22.5) {
+        ket_qua = tong + ((30 - tong) / 7.5) * u;
+      } else {
+        ket_qua = tong + u;
+      }
+
+      ketqua.textContent = "Tổng điểm: " + ket_qua.toFixed(2);
+    }
+
+    diem.addEventListener("input", tinhDiem);
+    kk.addEventListener("input", tinhDiem);
+    ut.addEventListener("input", tinhDiem);
+  </script>
+
+</body>
+</html>
